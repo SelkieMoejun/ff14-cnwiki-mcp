@@ -1,0 +1,12 @@
+{
+  "defaultWiki": "ff14.huijiwiki.com",
+  "wikis": {
+    "ff14.huijiwiki.com": {
+      "sitename": "最终幻想XIV中文维基",
+      "server": "http://127.0.0.1:8787",
+      "articlepath": "/wiki",
+      "scriptpath": "",
+      "readOnly": true
+    }
+  }
+}
