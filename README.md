@@ -22,13 +22,15 @@
 
 ## 安装要求
 
-1. **Python 3.10+**，并安装依赖：
+1. **Python 3.10+**，并安装依赖（macOS/Linux 上命令一般是 `python3`）：
 
    ```bash
    python -m pip install curl_cffi
    ```
 
 2. **Node.js**（LTS 版即可，用于 `npx` 运行 mediawiki-mcp-server，首次启动自动下载）
+
+> 支持 Windows / macOS / Linux；启动器会自动按平台选择 `npx` 的正确调用方式。
 
 ## 使用方法
 
@@ -52,8 +54,10 @@
    }
    ```
 
-   > Windows 上 `command` 建议写 Python 的完整路径，例如
-   > `"C:/Users/你的用户名/AppData/Local/Programs/Python/Python313/python.exe"`
+   > - Windows 上 `command` 建议写 Python 的完整路径，例如
+   >   `"C:/Users/你的用户名/AppData/Local/Programs/Python/Python313/python.exe"`
+   > - macOS / Linux 上通常写 `"python3"` 或完整路径（如 `"/usr/bin/python3"`），
+   >   `args` 里的脚本路径按实际克隆位置填写（如 `"/Users/你/ff14-cnwiki-mcp/server.py"`）
 
 3. 重启 MCP 客户端，即可让 AI 助手查询 FF14 维基，例如：
    - 「查一下灰机wiki上'究极神兵'的页面」

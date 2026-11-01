@@ -133,7 +133,8 @@ def start_mcp():
         "MCP_LOG_LEVEL": "warning",
         "MCP_CONTENT_MAX_BYTES": "75000",
     })
-    cmd = ["npx.cmd", "-y", "@professional-wiki/mediawiki-mcp-server@latest"]
+    npx = "npx.cmd" if os.name == "nt" else "npx"
+    cmd = [npx, "-y", "@professional-wiki/mediawiki-mcp-server@latest"]
     log("starting mcp: %s" % " ".join(cmd))
     proc = subprocess.Popen(cmd, env=env)
     try:
