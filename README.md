@@ -59,6 +59,37 @@
    - 「查一下灰机wiki上'究极神兵'的页面」
    - 「搜索所有标题以'幻想药'开头的页面」
 
+## 给 AI Agent 的部署指令
+
+如果你想让对方的 AI Agent 全自动完成部署，把下面这段提示词连同本仓库链接一起发给它即可：
+
+```text
+请帮我在本机部署这个 MCP 服务器：https://github.com/SelkieMoejun/ff14-cnwiki-mcp
+它是一个查询 FF14 中文维基（灰机wiki）的只读 MCP，请按以下步骤执行，每步完成后向我汇报结果：
+
+1. 【环境检测】先检测本机是否已安装 Python 3.10+ 和 Node.js：
+   - 运行 python --version（Windows 上若无反应再试 py --version）和 node --version
+   - 把检测结果明确告诉我。如果缺少其中任何一个，先询问我是否同意由你帮忙安装
+     （Windows 可用 winget，macOS 可用 brew），得到我同意后再安装；如果我选择自己装，
+     就停下来等我装好再继续。
+2. 【克隆代码】环境齐全后，询问我想把代码放在哪个目录（可建议一个默认位置），
+   然后执行 git clone https://github.com/SelkieMoejun/ff14-cnwiki-mcp.git
+3. 【安装依赖】用第 1 步确认的 Python 执行：python -m pip install curl_cffi
+4. 【写入配置】找到我正在使用的 MCP 客户端的配置文件（WorkBuddy 是
+   ~/.workbuddy/mcp.json，Claude Desktop 是 claude_desktop_config.json；修改前先读
+   出现有内容，只在 mcpServers 里新增、不要覆盖其他条目），加入：
+   "ff14-wiki": { "command": "<Python 完整路径>", "args": ["<克隆目录>/server.py"], "timeout": 60000 }
+   写完后把最终配置路径告诉我。
+5. 【验收】提示我重启 MCP 客户端。重启后做一次连通性自检：调用 ff14-wiki 的
+   search-page 工具搜索「陆行鸟」，能返回结果就是部署成功；失败则查看系统临时目录下的
+   ff14-wiki-mcp-proxy.log 排查原因并向我说明。
+
+注意：server.py 不需要也不应该被我手动常驻运行，它由 MCP 客户端按需通过 stdio 拉起。
+```
+
+> 提示：以上提示词对 WorkBuddy、Claude Code、Cursor 等具备命令执行能力的 Agent 均适用；
+> 纯对话型 AI 无法执行命令，只能由人照 README 手动操作。
+
 ## 工作原理
 
 ```
